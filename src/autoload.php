@@ -17,19 +17,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-spl_autoload_register(function ($class) {
-    static $classMap = array(
-        'DebugIterator'         => 'Debug/DebugIterator',
-        'DebugIteratorModes'    => 'Debug/DebugIteratorModes',
-        'MagicDebugIterator'    => 'Debug/MagicDebugIterator',
-        'SeekableDebugIterator' => 'Debug/SeekableDebugIterator',
-    );
 
-    $stub = isset($classMap[$class]) ? $classMap[$class] : pathinfo($class, PATHINFO_FILENAME);
-
-    $path = sprintf(__DIR__ . '/%s.php', $stub);
-
-    if (is_file($path)) {
-        require($path);
+class IteratorGardenUtil
+{
+    /**
+     * @param string|string[] $baseDir
+     */
+    public static function autoloadRegister($baseDir)
+    {
+        $baseDir = array_values((array) $baseDir);
+        foreach ($baseDir as $index => $directory) {
+            $dir = $index ? $baseDir[0] . '/' . $directory : $directory;
+            spl_autoload_register(function ($class) use ($dir) {
+                $stub = pathinfo($class, PATHINFO_FILENAME);
+                $path = sprintf($dir . '/%s.php', $stub);
+                if (is_file($path)) {
+                    require($path);
+                }
+            });
+        }
     }
-});
+}
+
+IteratorGardenUtil::autoloadRegister(array(
+    __DIR__,
+    'Debug',
+));
