@@ -56,4 +56,12 @@ abstract class IteratorTestCase extends PHPUnit_Framework_TestCase
         $actual = iterator_to_array($actual, FALSE);
         $this->assertEquals($expected, $actual, $message);
     }
+
+    protected function assertIterationKeys(array $expected, Traversable $actual, $message = '')
+    {
+        $subject = new DecoratingIteratorDecorator($actual, function($current) use ($actual) {
+            return $actual->key();
+        });
+        $this->assertIterationValues($expected, $subject, $message);
+    }
 }
