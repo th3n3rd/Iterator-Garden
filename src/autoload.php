@@ -42,5 +42,6 @@ class IteratorGardenUtil
 IteratorGardenUtil::autoloadRegister(array(
     __DIR__,
     'Debug',
+    'DOM',
     'Filter',
 ));
