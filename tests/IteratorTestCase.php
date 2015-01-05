@@ -17,8 +17,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace IteratorGarden\Test;
+
+use Iterator;
+use IteratorIterator;
+use MultipleIterator;
+use PHPUnit_Framework_TestCase;
+use Traversable;
+
 abstract class IteratorTestCase extends PHPUnit_Framework_TestCase
 {
+    private static $namespace = 'IteratorGarden';
+
+    protected function getFullyQualifiedClassName($className)
+    {
+        return sprintf('%s\%s', self::$namespace, ltrim($className, '\\'));
+    }
+
     /**
      * Iteration test
      *

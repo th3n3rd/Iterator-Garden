@@ -17,6 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace IteratorGarden\Test;
+
+use Exception;
+use IteratorGarden\FilesystemStubIterator;
+use ReflectionMethod;
+use ReflectionObject;
+use SplFileInfo;
+
 class FilesystemStubIteratorTest extends IteratorTestCase
 {
     public function testConstructor()

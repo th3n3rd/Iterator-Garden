@@ -17,20 +17,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace IteratorGarden\Test;
+
+use ArrayIterator;
+use IteratorGarden\FullCachingIterator;
+
 /**
- * @covers IndexIteration
+ * @covers FullCachingIterator
  */
-class IndexIterationTest extends IteratorTestCase
+class FullCachingIteratorTest extends IteratorTestCase
 {
     function testIteration()
     {
         $expected  = new ArrayIterator(range(0, 2));
-        $actual    = new IndexIteration($expected);
-
-        $this->assertSame(NULL, $actual->getIndex());
+        $actual    = new FullCachingIterator($expected);
 
         $this->assertIteration($expected, $actual);
-
-        $this->assertSame(2, $actual->getIndex());
     }
 }

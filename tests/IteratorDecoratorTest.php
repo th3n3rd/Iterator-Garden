@@ -1,7 +1,7 @@
 <?php
 /*
  * Iterator Garden - Let Iterators grow like flowers in the garden.
- * Copyright 2013 hakre <http://hakre.wordpress.com/>
+ * Copyright 2013, 1014 hakre <http://hakre.wordpress.com/>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -17,16 +17,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * @covers FullCachingIterator
- */
-class FullCachingIteratorTest extends IteratorTestCase
+namespace IteratorGarden\Test;
+
+use ArrayIterator;
+use IteratorGarden\IteratorDecorator;
+
+class IteratorDecoratorTest extends IteratorTestCase
 {
     function testIteration()
     {
         $expected  = new ArrayIterator(range(0, 2));
-        $actual    = new FullCachingIterator($expected);
+        $actual    = new IteratorDecorator($expected);
 
         $this->assertIteration($expected, $actual);
+    }
+
+    function testDecoration()
+    {
+        $subject  = new ArrayIterator(range(0, 2));
+        $decorated = new IteratorDecorator($subject);
+
+        $this->assertSame($subject->valid(), TRUE);
+
+        $subject->next();
+        $this->assertSame($decorated->current(), 1);
+
+        $this->assertSame($subject, $decorated->getInnerIterator());
     }
 }

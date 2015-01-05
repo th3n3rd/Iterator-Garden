@@ -13,9 +13,13 @@
         "phpunit/phpunit": "4.1.*"
     },
     "autoload": {
-        "files": ["src/autoload.php"]
+        "psr-4": {
+            "IteratorGarden\\": "src/"
+        }
     },
     "autoload-dev": {
-        "files": ["test/bootstrap.php"]
+        "psr-4": {
+            "IteratorGarden\\Test\\": "tests/"
+        }
     }
 }

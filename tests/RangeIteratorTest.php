@@ -17,14 +17,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-spl_autoload_register(function ($class) {
-    $stub = pathinfo($class, PATHINFO_FILENAME);
-    $path = sprintf(__DIR__ . '/%s.php', $stub);
+namespace IteratorGarden\Test;
 
-    if (is_file($path)) {
-        require($path);
+use ArrayIterator;
+use ReflectionClass;
+
+class RangeIteratorTest extends IteratorTestCase
+{
+
+    public function testRange()
+    {
+        $from = 0;
+        $to   = 1;
+        $step = -.1;
+
+        $this->assertRangeIterator($from, $to, $step);
+        $this->assertRangeIterator($to, $from, $step);
     }
-});
 
-require(__DIR__ . '/../src/autoload.php');
+    public function testRangeWithSingleElement()
+    {
+        $this->assertRangeIterator(1, 1);
+        $this->assertRangeIterator(1, 1, 1);
+    }
 
+    private function assertRangeIterator($from, $to, $step = NULL)
+    {
+        $refl       = new ReflectionClass('RangeIterator');
+        $iterator   = $refl->newInstanceArgs(array($from, $to, $step));
+        $rangeArray = new ArrayIterator(range($from, $to, $step));
+
+        $this->assertIteration($rangeArray, $iterator);
+    }
+}

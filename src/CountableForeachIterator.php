@@ -17,6 +17,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace IteratorGarden;
+
+use ArrayIterator;
+use ArrayObject;
+use Countable;
+use InvalidArgumentException;
+use IteratorIterator;
+use Traversable;
+
 /**
  * CountableForeachIterator Class A
  *

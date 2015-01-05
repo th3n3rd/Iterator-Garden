@@ -17,6 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace IteratorGarden;
+
+use FilterIterator;
+
 abstract class ForeachFilterIterator extends FilterIterator
 {
     public function __construct($foreachAble) {

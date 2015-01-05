@@ -17,6 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace IteratorGarden\Test;
+
+use Exception;
+use IteratorGarden\DecoratingIterator;
+use EmptyIterator;
+use ArrayIterator;
+use stdClass;
+
 /**
  * @covers DecoratingIterator
  */

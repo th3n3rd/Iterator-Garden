@@ -17,6 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace IteratorGarden\Test;
+use IteratorGarden\DualDirectoryIterator;
+use FilesystemIterator;
+use LogicException;
+use UnexpectedValueException;
+use Exception;
+
 /**
  * @covers DualDirectoryIterator
  */

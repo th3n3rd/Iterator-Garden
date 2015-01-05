@@ -17,6 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace IteratorGarden;
+
+use ArrayIterator;
+use IteratorIterator;
+use InvalidArgumentException;
+use Iterator;
+use Traversable;
+
 /**
  * Class ForeachIterator
  *
@@ -24,6 +32,11 @@
  */
 class ForeachIterator extends IteratorIterator
 {
+    public function __construct($foreachAble)
+    {
+        parent::__construct(self::getTraversable($foreachAble));
+    }
+
     /**
      * For anything foreach-able (Traversable, object & array) in PHP, this returns an Iterator.
      *
@@ -68,10 +81,5 @@ class ForeachIterator extends IteratorIterator
         }
 
         throw new InvalidArgumentException(sprintf('%s is not foreachable', gettype($foreachAble)));
-    }
-
-    public function __construct($foreachAble)
-    {
-        parent::__construct(self::getTraversable($foreachAble));
     }
 }

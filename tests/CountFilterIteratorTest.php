@@ -17,6 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace IteratorGarden\Test;
+
+use IteratorGarden\CountFilterIterator;
+
 class CountFilterIteratorTest extends IteratorTestCase
 {
     public function testIteratorion() {

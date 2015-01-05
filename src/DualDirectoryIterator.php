@@ -17,6 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace IteratorGarden;
+
+use BadMethodCallException;
+use FilesystemIterator;
+use InvalidArgumentException;
+use LogicException;
+use SplFileInfo;
+
 /**
  * Class DualDirectoryIterator
  *

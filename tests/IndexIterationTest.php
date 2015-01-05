@@ -1,7 +1,7 @@
 <?php
 /*
  * Iterator Garden - Let Iterators grow like flowers in the garden.
- * Copyright 2013, 2014 hakre <http://hakre.wordpress.com/>
+ * Copyright 2013 hakre <http://hakre.wordpress.com/>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -17,29 +17,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace IteratorGarden\Test;
+
+use ArrayIterator;
+use IteratorGarden\IndexIteration;
+
 /**
- * @covers TraversableDecorator
+ * @covers IndexIteration
  */
-class TraversableDecoratorTest extends IteratorTestCase
+class IndexIterationTest extends IteratorTestCase
 {
-    public function testDecoratorWithTraversal()
+    function testIteration()
     {
+        $expected  = new ArrayIterator(range(0, 2));
+        $actual    = new IndexIteration($expected);
 
-        $xml = '<root><ele/><ele/><ele/></root>';
+        $this->assertSame(NULL, $actual->getIndex());
 
-        $subject   = new SimpleXMLElement($xml);
-        $decorated = new TraversableDecorator($subject);
-        $array     = iterator_to_array($subject, FALSE);
+        $this->assertIteration($expected, $actual);
 
-        $this->assertIterationValues($array, $decorated);
-
-        $decorated->rewind();
-        $this->assertSame('ele', $decorated->key());
-    }
-
-    public function testEmptyDecoration()
-    {
-        $decorated = new TraversableDecorator();
-        $this->assertIterationValues(array(), $decorated);
+        $this->assertSame(2, $actual->getIndex());
     }
 }

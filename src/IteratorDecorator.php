@@ -17,6 +17,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace IteratorGarden;
+
+use OuterIterator;
+use Iterator;
+
 /**
  * IteratorDecorator
  *

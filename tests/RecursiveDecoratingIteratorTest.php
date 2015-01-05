@@ -17,6 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace IteratorGarden\Test;
+
+use Traversable;
+use IteratorGarden\RecursiveDecoratingIterator;
+use RecursiveArrayIterator;
+use RecursiveIteratorIterator;
+
 /**
  * @covers RecursiveDecoratingIterator
  */
