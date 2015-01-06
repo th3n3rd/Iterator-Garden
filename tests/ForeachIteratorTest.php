@@ -33,7 +33,7 @@ class ForeachIteratorTest extends ForeachIteratorBaseTest
      */
     public function creation($foreachAble, $valid)
     {
-        $this->helperTestConstructor('ForeachIterator', $foreachAble, $valid);
+        $this->helperTestConstructor('IteratorGarden\ForeachIterator', $foreachAble, $valid);
     }
 
     /**

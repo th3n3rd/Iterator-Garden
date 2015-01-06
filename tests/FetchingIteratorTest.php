@@ -29,7 +29,7 @@ class FetchingIteratorTest extends IteratorTestCase
     {
         $callback = $this->createCallbackWithValues();
         $subject  = new FetchingIterator($callback);
-        $this->assertInstanceOf('FetchingIterator', $subject);
+        $this->assertInstanceOf('IteratorGarden\FetchingIterator', $subject);
     }
 
     private function createCallbackWithValues(array $values = array())

@@ -60,7 +60,7 @@ class RecursiveDecoratingIteratorTest extends IteratorTestCase
     public function testConstructor()
     {
         $it = $this->createSubject();
-        $this->assertInstanceOf('RecursiveDecoratingIterator', $it);
+        $this->assertInstanceOf('IteratorGarden\RecursiveDecoratingIterator', $it);
 
     }
 

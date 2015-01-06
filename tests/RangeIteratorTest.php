@@ -43,7 +43,7 @@ class RangeIteratorTest extends IteratorTestCase
 
     private function assertRangeIterator($from, $to, $step = NULL)
     {
-        $refl       = new ReflectionClass('RangeIterator');
+        $refl       = new ReflectionClass('IteratorGarden\RangeIterator');
         $iterator   = $refl->newInstanceArgs(array($from, $to, $step));
         $rangeArray = new ArrayIterator(range($from, $to, $step));
 

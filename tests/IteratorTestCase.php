@@ -27,13 +27,6 @@ use Traversable;
 
 abstract class IteratorTestCase extends PHPUnit_Framework_TestCase
 {
-    private static $namespace = 'IteratorGarden';
-
-    protected function getFullyQualifiedClassName($className)
-    {
-        return sprintf('%s\%s', self::$namespace, ltrim($className, '\\'));
-    }
-
     /**
      * Iteration test
      *

@@ -47,7 +47,7 @@ class CountableForeachIteratorTest extends ForeachIteratorBaseTest
      */
     public function testConstructor($foreachAble, $valid)
     {
-        $this->helperTestConstructor('CountableForeachIterator', $foreachAble, $valid);
+        $this->helperTestConstructor('IteratorGarden\CountableForeachIterator', $foreachAble, $valid);
     }
 
     /**

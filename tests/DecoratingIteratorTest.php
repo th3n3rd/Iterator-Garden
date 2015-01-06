@@ -50,13 +50,13 @@ class DecoratingIteratorTest extends IteratorTestCase
 
     public function testCallbackClass() {
 
-        $it = new DecoratingIterator(new ArrayIterator(array(new stdClass())), 'ForeachIterator');
+        $it = new DecoratingIterator(new ArrayIterator(array(new stdClass())), 'IteratorGarden\ForeachIterator');
 
         $array = iterator_to_array($it);
 
         $this->assertCount(1, $array);
 
-        $this->assertInstanceOf('ForeachIterator', $array[0]);
+        $this->assertInstanceOf('IteratorGarden\ForeachIterator', $array[0]);
     }
 
     /**

@@ -34,7 +34,7 @@ class DualDirectoryIteratorTest extends IteratorTestCase
      */
     public function creation() {
         $dual = new DualDirectoryIterator('.', '.');
-        $this->assertInstanceOf('DualDirectoryIterator', $dual);
+        $this->assertInstanceOf('IteratorGarden\DualDirectoryIterator', $dual);
     }
 
     /**
@@ -43,7 +43,7 @@ class DualDirectoryIteratorTest extends IteratorTestCase
     public function creationWithFilesystemIterator() {
         $iter = new FilesystemIterator('.');
         $dual = new DualDirectoryIterator($iter, '.');
-        $this->assertInstanceOf('DualDirectoryIterator', $dual);
+        $this->assertInstanceOf('IteratorGarden\DualDirectoryIterator', $dual);
     }
 
     /**
@@ -69,7 +69,7 @@ class DualDirectoryIteratorTest extends IteratorTestCase
             $this->fail('Exception on NULL is wrong');
         }
 
-        $dual->setInfoClass('IteratorIterator');
+        $dual->setInfoClass('IteratorGarden\IteratorIterator');
     }
 
     /**
@@ -78,7 +78,7 @@ class DualDirectoryIteratorTest extends IteratorTestCase
     public function fileInfoClass() {
         $dual = new DualDirectoryIterator('.', '.');
 
-        $infoClass = 'FilesystemStubIterator';
+        $infoClass = 'IteratorGarden\FilesystemStubIterator';
         $dual->setInfoClass($infoClass);
 
         $dual->rewind();

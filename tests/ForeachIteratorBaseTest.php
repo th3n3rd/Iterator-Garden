@@ -56,7 +56,6 @@ abstract class ForeachIteratorBaseTest extends IteratorTestCase
     protected function helperTestConstructor($className, $foreachAble, $valid)
     {
         try {
-            $className = $this->getFullyQualifiedClassName($className);
             $subject = new $className($foreachAble);
         } catch (Exception $e) {
             $this->addToAssertionCount(1);
