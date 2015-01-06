@@ -22,15 +22,27 @@ use SeekableIterator;
 use InvalidArgumentException;
 
 /**
- * Class SeekableIteration
+ * Class SeekableIteration.
  *
- * Iteration that is Seekable
+ * Iteration that is Seekable.
+ *
+ * @package IteratorGarden
  */
 class SeekableIteration extends IndexIteration implements SeekableIterator
 {
+    /**
+     * @var bool
+     */
     private $skipNextRewind;
+
+    /**
+     * @var mixed
+     */
     private $seekStartPosition;
 
+    /**
+     * {@inheritdoc}
+     */
     public function rewind()
     {
         $this->skipNextRewind || parent::rewind();
@@ -41,6 +53,9 @@ class SeekableIteration extends IndexIteration implements SeekableIterator
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function next()
     {
         $this->skipNextRewind || parent::next();
@@ -48,8 +63,11 @@ class SeekableIteration extends IndexIteration implements SeekableIterator
     }
 
     /**
-     * @param int $position
-     * @param bool $skipNextRewind (optional) Ignore the next rewind() or next() - allows to offset
+     * Move the cursor to the given position.
+     *
+     * @param int  $position
+     * @param bool $skipNextRewind Ignore the next rewind() or next() - allows to offset
+     *
      * @throws InvalidArgumentException
      */
     public function seek($position, $skipNextRewind = FALSE)
@@ -74,22 +92,20 @@ class SeekableIteration extends IndexIteration implements SeekableIterator
             $this->next();
         }
 
-        $this->skipNextRewind = (bool)$skipNextRewind;
+        $this->skipNextRewind = (bool) $skipNextRewind;
     }
 
     /**
-     * set starting position for next iteration
+     * Sets starting position for next iteration.
      *
-     * @param $position
+     * @param int $position
+     *
      * @return $this
      */
     public function seekStart($position)
     {
-
-        $this->seekStartPosition = max(0, (int)$position);
-
+        $this->seekStartPosition = max(0, (int) $position);
         return $this;
-
     }
 }
 

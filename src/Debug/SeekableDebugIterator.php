@@ -22,17 +22,27 @@ namespace IteratorGarden\Debug;
 use SeekableIterator;
 
 /**
- * Class SeekableDebugIterator
+ * Class SeekableDebugIterator.
  *
  * A DebugIterator that shows seekable events.
+ *
+ * @package IteratorGarden\Debug
  */
 class SeekableDebugIterator extends DebugIterator implements SeekableIterator
 {
-    public function __construct(SeekableIterator $it)
+    /**
+     * Constructor.
+     *
+     * @param SeekableIterator $iterator
+     */
+    public function __construct(SeekableIterator $iterator)
     {
-        parent::__construct($it);
+        parent::__construct($iterator);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function seek($position) {
         $this->event(sprintf('%s %d', __FUNCTION__, $position));
         $this->getInnerIterator()->seek($position);

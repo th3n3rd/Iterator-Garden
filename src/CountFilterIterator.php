@@ -20,7 +20,9 @@
 namespace IteratorGarden;
 
 /**
- * Class CountFilterIterator
+ * Class CountFilterIterator.
+ *
+ * @package IteratorGarden
  */
 class CountFilterIterator extends ForeachFilterIterator
 {
@@ -29,12 +31,21 @@ class CountFilterIterator extends ForeachFilterIterator
      */
     private $count;
 
+    /**
+     * Constructor.
+     *
+     * @param mixed $foreachAble
+     * @param int   $count
+     */
     public function __construct($foreachAble, $count = 1)
     {
-        $this->count = (int)$count;
+        $this->count = (int) $count;
         parent::__construct($foreachAble);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function accept()
     {
         return $this->count === count($this->current());

@@ -18,18 +18,41 @@
  */
 
 namespace IteratorGarden;
+
 use Iterator;
 use Exception;
 
 /**
- * Class IterationStep
+ * Class IterationStep.
  *
  * Represents a single iteration in an iteration.
+ *
+ * @package IteratorGarden
  */
 class IterationStep
 {
-    private $current, $key, $valid;
+    /**
+     * @var mixed
+     */
+    private $current;
 
+    /**
+     * @var mixed
+     */
+    private $key;
+
+    /**
+     * @var bool
+     */
+    private $valid;
+
+    /**
+     * Constructor.
+     *
+     * @param bool  $valid
+     * @param mixed $current
+     * @param mixed $key
+     */
     public function __construct($valid, $current, $key)
     {
         $this->valid   = $valid;
@@ -37,6 +60,13 @@ class IterationStep
         $this->key     = $key;
     }
 
+    /**
+     * Creates a new instance from the given iterator.
+     *
+     * @param Iterator $iterator
+     *
+     * @return IterationStep
+     */
     public static function createFromIterator(Iterator $iterator)
     {
         $valid = NULL;
@@ -57,16 +87,31 @@ class IterationStep
         );
     }
 
+    /**
+     * Returns the current element.
+     *
+     * @return mixed
+     */
     public function getCurrent()
     {
         return $this->current;
     }
 
+    /**
+     * Returns the key.
+     *
+     * @return mixed
+     */
     public function getKey()
     {
         return $this->key;
     }
 
+    /**
+     * Checks whether the current position is valid.
+     *
+     * @return bool
+     */
     public function getValid()
     {
         return $this->valid;

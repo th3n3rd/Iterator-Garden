@@ -26,15 +26,17 @@ use LogicException;
 use SplFileInfo;
 
 /**
- * Class DualDirectoryIterator
+ * Class DualDirectoryIterator.
  *
  * Iterate over two directories at once.
  *
  * This inherits comparison and ordering amongst the two directory listings: Current results are ordered by
  * filename, if both are equal, the first path (A) is preferred over the second (B) and returned.
  *
- * TODO When switching to a decorator (see TODO in @see FilesystemStubiterator, flag/info-class handling might differ,
- *      so far setFileClass()/openFile() is missing, too
+ * @todo When switching to a decorator (see TODO in @see FilesystemStubiterator,
+ *       flag/info-class handling might differ,so far setFileClass()/openFile() is missing, too
+ *
+ * @package IteratorGarden
  */
 class DualDirectoryIterator extends FilesystemIterator
 {
@@ -64,6 +66,8 @@ class DualDirectoryIterator extends FilesystemIterator
     protected $info_class = 'SplFileInfo';
 
     /**
+     * Constructor.
+     *
      * @param string|FilesystemIterator $pathA
      * @param string|FilesystemIterator $pathB
      * @param int $flags
@@ -81,8 +85,11 @@ class DualDirectoryIterator extends FilesystemIterator
     }
 
     /**
+     * Creates a FilesystemIterator instance.
+     *
      * @param  string|FilesystemIterator $path
-     * @param  int $flags to be set on new inner iterator returned
+     * @param  int                       $flags to be set on new inner iterator returned
+     *
      * @throws InvalidArgumentException
      * @return FilesystemIterator|FilesystemStubIterator
      */
@@ -115,11 +122,17 @@ class DualDirectoryIterator extends FilesystemIterator
         return new FilesystemStubIterator($path, $flags);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getFlags()
     {
         return $this->flags;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setFlags($flags = NULL)
     {
         $this->flags = $flags;
@@ -127,6 +140,9 @@ class DualDirectoryIterator extends FilesystemIterator
         parent::setFlags($flags);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function rewind()
     {
         $this->pathA->rewind();
@@ -134,24 +150,33 @@ class DualDirectoryIterator extends FilesystemIterator
         $this->current = $this->getFirstIterator();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function valid()
     {
         return $this->pathA->valid() || $this->pathB->valid();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function current()
     {
-        $iter = $this->current;
+        $iterator = $this->current;
 
-        if (!($iter && $iter->valid())) {
+        if (!($iterator && $iterator->valid())) {
             throw new LogicException(
                 sprintf('Invalid Iterator given or %s in undefined state - perhaps rewind() first.', __CLASS__)
             );
         }
 
-        return $iter->current();
+        return $iterator->current();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function key()
     {
         return $this->current->key();
@@ -179,6 +204,8 @@ class DualDirectoryIterator extends FilesystemIterator
     }
 
     /**
+     * Returns the first iterator.
+     *
      * @return FilesystemIterator
      */
     protected function getFirstIterator()
@@ -201,6 +228,8 @@ class DualDirectoryIterator extends FilesystemIterator
     }
 
     /**
+     * Checks whether the current file names are equal.
+     *
      * @return bool
      */
     protected function areEqual()
@@ -215,7 +244,7 @@ class DualDirectoryIterator extends FilesystemIterator
     }
 
     /**
-     * strcmp on both A and B filenames
+     * Compares the current filenames on both path A and B.
      *
      * @return int
      */
@@ -228,6 +257,8 @@ class DualDirectoryIterator extends FilesystemIterator
     }
 
     /**
+     * Returns the path names for both path A and B.
+     *
      * @return string[] array of pathnames (of which not all may exist)
      */
     public function getPathnames()
@@ -274,6 +305,8 @@ class DualDirectoryIterator extends FilesystemIterator
     }
 
     /**
+     * Returns inner iterators.
+     *
      * @return FilesystemIterator[]
      */
     public function getInnerIterators() {
@@ -284,7 +317,7 @@ class DualDirectoryIterator extends FilesystemIterator
     }
 
     /**
-     * Sets the class used with getFileInfo and getPathInfo
+     * Sets the class used with getFileInfo and getPathInfo.
      *
      * @param string $class_name (optional) of an SplFileInfo derived class to use
      */
@@ -302,7 +335,7 @@ class DualDirectoryIterator extends FilesystemIterator
     }
 
     /**
-     * Gets an SplFileInfo object for the file
+     * Gets an SplFileInfo object for the file.
      *
      * @param string $class_name of an SplFileInfo derived class to use
      *
@@ -320,6 +353,8 @@ class DualDirectoryIterator extends FilesystemIterator
     }
 
     /**
+     * Returns a SplFileInfo instance.
+     *
      * @param string $class_name (optional) of an SplFileInfo derived class to use
      *
      * @return SplFileInfo[] array of SplFileInfo-s (of which may not all files exist)
@@ -341,6 +376,8 @@ class DualDirectoryIterator extends FilesystemIterator
     }
 
     /**
+     * Returns a SplFileInfo for the parent path.
+     *
      * @param null $class_name
      *
      * @return SplFileInfo object for the parent path of the file

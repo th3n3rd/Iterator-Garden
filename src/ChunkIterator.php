@@ -20,27 +20,44 @@
 namespace IteratorGarden;
 
 /**
- * Class ChunkIterator
+ * Class ChunkIterator.
+ *
+ * @package IteratorGarden
  */
 final class ChunkIterator extends ChunkAbstract
 {
+    /**
+     * @var int
+     */
     private $index;
 
+    /**
+     * {@inheritdoc}
+     */
     public function rewind() {
         $this->index = 0;
         parent::rewind();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function current() {
         $chunk = new IteratorChunk($this->traversable, $this->size);
         $chunk->standAlone = false;
         return $chunk;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function key() {
         return $this->index;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function next() {
         $this->index++;
         parent::next();

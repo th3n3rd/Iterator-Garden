@@ -27,20 +27,25 @@ use IteratorIterator;
 use Traversable;
 
 /**
- * CountableForeachIterator Class A
+ * Class CountableForeachIterator.
  *
- * For Class A/B/C see ForeachIterator
+ * @package IteratorGarden
  */
 class CountableForeachIterator extends IteratorIterator implements Countable
 {
-    public function __construct($iterable)
+    /**
+     * Constructor.
+     *
+     * @param Traversable $traversable
+     */
+    public function __construct($traversable)
     {
-        if (is_array($iterable)) {
-            $iterator = new ArrayIterator($iterable);
-        } elseif ($iterable instanceof Traversable) {
-            $iterator = $iterable;
-        } elseif (is_object($iterable)) {
-            $iterator = new ArrayObject($iterable);
+        if (is_array($traversable)) {
+            $iterator = new ArrayIterator($traversable);
+        } elseif ($traversable instanceof Traversable) {
+            $iterator = $traversable;
+        } elseif (is_object($traversable)) {
+            $iterator = new ArrayObject($traversable);
         } else {
             throw new InvalidArgumentException('Not an Array, Traversable or Object.');
         }
@@ -48,6 +53,9 @@ class CountableForeachIterator extends IteratorIterator implements Countable
         parent::__construct($iterator);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function count()
     {
         $inner = $this->getInnerIterator();

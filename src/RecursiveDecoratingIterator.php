@@ -22,19 +22,34 @@ use RecursiveIterator;
 use Traversable;
 
 /**
- * Class RecursiveDecoratingIterator
+ * Class RecursiveDecoratingIterator.
+ *
+ * @package IteratorGarden
  */
 class RecursiveDecoratingIterator extends DecoratingIterator implements RecursiveIterator
 {
-    private $decorator;
-
     const DECORATE_NONE     = 0;
     const DECORATE_LEAFS    = 1;
     const DECORATE_CHILDREN = 2;
     const DECORATE_NODES    = 3;
 
+    /**
+     * @var mixed
+     */
+    private $decorator;
+
+    /**
+     * @var int
+     */
     private $mode;
 
+    /**
+     * Constructor.
+     *
+     * @param Traversable $iterator
+     * @param mixed       $decorator
+     * @param int         $mode
+     */
     function __construct(Traversable $iterator, $decorator, $mode = self::DECORATE_LEAFS)
     {
         parent::__construct($iterator, $decorator);
@@ -44,6 +59,9 @@ class RecursiveDecoratingIterator extends DecoratingIterator implements Recursiv
         $this->mode = $mode === NULL ? self::DECORATE_LEAFS : $mode;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function current()
     {
         $mode = $this->mode;
@@ -58,11 +76,17 @@ class RecursiveDecoratingIterator extends DecoratingIterator implements Recursiv
         return $this->getInnerIterator()->current();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function hasChildren()
     {
         return $this->getInnerIterator()->hasChildren();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getChildren()
     {
         return new self($this->getInnerIterator()->getChildren(), $this->decorator, $this->mode);

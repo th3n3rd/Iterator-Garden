@@ -22,14 +22,41 @@ use Iterator;
 use InvalidArgumentException;
 
 /**
- * Class RangeIterator
+ * Class RangeIterator.
  *
- * The RangeIterator allows to iterate over a range of numbers, from low to high
+ * The RangeIterator allows to iterate over a range of numbers, from low to high.
+ *
+ * @package IteratorGarden
  */
 class RangeIterator implements Iterator
 {
-    private $offset, $index, $length, $step;
+    /**
+     * @var float|int
+     */
+    private $offset;
 
+    /**
+     * @var int
+     */
+    private $index;
+
+    /**
+     * @var float
+     */
+    private $length;
+
+    /**
+     * @var int
+     */
+    private $step;
+
+    /**
+     * Constructor.
+     *
+     * @param int|float $low
+     * @param int|float $high
+     * @param int       $step
+     */
     public function __construct($low, $high, $step = NULL)
     {
         $low  = $this->inputArgumentNumeric('Low', $low);
@@ -49,26 +76,41 @@ class RangeIterator implements Iterator
         $this->step   = $low > $high ? -$step : $step;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function rewind()
     {
         $this->index = 0;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function valid()
     {
         return $this->index < $this->length;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function current()
     {
         return $this->offset + $this->index * $this->step;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function key()
     {
         return $this->index;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function next()
     {
         $this->index < $this->length
@@ -76,6 +118,8 @@ class RangeIterator implements Iterator
     }
 
     /**
+     * Moves the cursor to the given position.
+     *
      * @param int $position
      */
     public function seek($position)
@@ -84,8 +128,11 @@ class RangeIterator implements Iterator
     }
 
     /**
-     * @param $name
-     * @param $value
+     * Checks whether the given argument is numeric.
+     *
+     * @param string $name
+     * @param mixed  $value
+     *
      * @return float|int
      * @throws InvalidArgumentException
      */

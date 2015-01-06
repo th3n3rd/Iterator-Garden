@@ -23,22 +23,37 @@ use OuterIterator;
 use Iterator;
 
 /**
- * IteratorDecorator
+ * Class IteratorDecorator.
  *
- * Iterator Decorator class that also allows to set the Iterator
+ * Iterator Decorator class that also allows to set the Iterator.
+ *
+ * @package IteratorGarden
  */
 class IteratorDecorator extends TraversableDecorator implements OuterIterator
 {
+    /**
+     * Constructor.
+     *
+     * @param Iterator $iterator
+     */
     public function __construct(Iterator $iterator)
     {
         $this->setInnerIterator($iterator);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getInnerIterator()
     {
         return $this->traversable;
     }
 
+    /**
+     * Sets the inner iterator.
+     *
+     * @param Iterator $iterator
+     */
     public function setInnerIterator(Iterator $iterator)
     {
         $this->traversable = $iterator;

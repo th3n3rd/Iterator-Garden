@@ -23,7 +23,9 @@ use IteratorIterator;
 use RuntimeException;
 
 /**
- * Class DebugIterator
+ * Class DebugIterator.
+ *
+ * @package IteratorGarden\Debug
  */
 class DebugIterator extends IteratorIterator
 {
@@ -31,10 +33,19 @@ class DebugIterator extends IteratorIterator
     const MODE_ECHO   = 2;
     const MODE_STDERR = 3;
 
+    /**
+     * @var int
+     */
     private $mode = self::MODE_ECHO;
 
+    /**
+     * @var int
+     */
     private $index;
 
+    /**
+     * {@inheritdoc}
+     */
     public function rewind()
     {
         $this->index = 0;
@@ -42,24 +53,36 @@ class DebugIterator extends IteratorIterator
         parent::rewind();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function valid()
     {
         $this->event(__FUNCTION__);
         return parent::valid();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function current()
     {
         $this->event(__FUNCTION__);
         return parent::current();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function key()
     {
         $this->event(__FUNCTION__);
         return parent::key();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function next()
     {
         $this->index++;
@@ -67,6 +90,11 @@ class DebugIterator extends IteratorIterator
         parent::next();
     }
 
+    /**
+     * Handles the given event.
+     *
+     * @param $event
+     */
     final protected function event($event)
     {
         $message = sprintf("Iterating (%s): #%d %s", get_class($this->getInnerIterator()), $this->index, $event);

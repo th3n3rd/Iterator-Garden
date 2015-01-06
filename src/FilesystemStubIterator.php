@@ -23,22 +23,39 @@ use FilesystemIterator;
 use SplFileInfo;
 
 /**
- * Class FilesystemStubIterator
+ * Class FilesystemStubIterator.
  *
  * A FilesystemIterator of which the directory must not exists.
  *
- * TODO Refactor out an SplFileInfo decorator because the DualDirectoryIterator within its current
- *      path of inheritance is a FilesystemIterator -> DirectoryIterator -> SplFileInfo as well
- *      as which it yet does not qualify. This could delegate some boilerplate code into the decorator, too.
+ * @todo Refactor out an SplFileInfo decorator because the DualDirectoryIterator within its current path of
+ *       inheritance is a FilesystemIterator -> DirectoryIterator -> SplFileInfo as well as which it yet
+ *       does not qualify. This could delegate some boilerplate code into the decorator, too.
+ *
+ * @package IteratorGarden
  */
 class FilesystemStubIterator extends FilesystemIterator
 {
+    /**
+     * @var int
+     */
     private $flags;
 
+    /**
+     * @var string
+     */
     private $path;
 
+    /**
+     * @var
+     */
     private $fileInfo;
 
+    /**
+     * Constructor.
+     *
+     * @param string $path
+     * @param int    $flags
+     */
     public function __construct($path, $flags = NULL)
     {
         if ($flags === NULL) {
@@ -49,26 +66,41 @@ class FilesystemStubIterator extends FilesystemIterator
         $this->flags = $flags;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getExtension()
     {
         return pathinfo($this->path, PATHINFO_EXTENSION);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getFlags()
     {
         return $this->flags;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setFlags($flags = NULL)
     {
         $this->flags = $flags;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getFilename()
     {
         return basename($this->path);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getFileInfo($class_name = NULL)
     {
         if ($this->fileInfo) {
@@ -84,111 +116,177 @@ class FilesystemStubIterator extends FilesystemIterator
         return $this->fileInfo = $info;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getPath()
     {
         return dirname($this->path);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getPathname()
     {
         return $this->path;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getPerms()
     {
         return $this->getFileInfo()->getPerms();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getInode()
     {
         return $this->getFileInfo()->getInode();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getSize()
     {
         return $this->getFileInfo()->getSize();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getOwner()
     {
         return $this->getFileInfo()->getOwner();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getGroup()
     {
         return $this->getFileInfo()->getGroup();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getATime()
     {
         return $this->getFileInfo()->getATime();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getMTime()
     {
         return $this->getFileInfo()->getMTime();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getCTime()
     {
         return $this->getFileInfo()->getCTime();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getType()
     {
         return $this->getFileInfo()->getType();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isWritable()
     {
         return $this->getFileInfo()->isWritable();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isReadable()
     {
         return $this->getFileInfo()->isReadable();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isFile()
     {
         return $this->getFileInfo()->isFile();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isDir()
     {
         return $this->getFileInfo()->isDir();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isLink()
     {
         return $this->getFileInfo()->isLink();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getLinkTarget()
     {
         return $this->getFileInfo()->getLinkTarget();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getRealPath()
     {
         return $this->getFileInfo()->getRealPath();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isExecutable()
     {
         return $this->getFileInfo()->isExecutable();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function __toString()
     {
         return (string) $this->path;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getBasename($suffix = NULL)
     {
         return $this->getFileInfo()->getBasename($suffix);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getPathInfo($class_name = NULL)
     {
         if ($class_name === NULL) {
@@ -198,6 +296,9 @@ class FilesystemStubIterator extends FilesystemIterator
         return $this->getFileInfo()->getPathInfo($class_name);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function openFile($open_mode = 'r', $use_include_path = FALSE, $context = NULL)
     {
         if ($context === NULL) {
@@ -207,6 +308,9 @@ class FilesystemStubIterator extends FilesystemIterator
         return $this->getFileInfo()->openFile($open_mode, $use_include_path, $context);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function valid()
     {
         return FALSE;

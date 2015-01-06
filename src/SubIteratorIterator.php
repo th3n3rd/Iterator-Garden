@@ -21,7 +21,9 @@ namespace IteratorGarden;
 use RecursiveIteratorIterator;
 
 /**
- * Class SubIteratorIterator
+ * Class SubIteratorIterator.
+ *
+ * @package IteratorGarden
  */
 class SubIteratorIterator extends TraversableDecorator
 {
@@ -35,18 +37,35 @@ class SubIteratorIterator extends TraversableDecorator
      */
     private $iterator;
 
+    /**
+     * @var int
+     */
     private $flags;
+
+    /**
+     * @var int
+     */
     private $direction;
 
+    /**
+     * Constructor.
+     *
+     * @param RecursiveIteratorIterator $iterator
+     * @param int                       $flags
+     * @param int                       $direction
+     */
     public function __construct(RecursiveIteratorIterator $iterator, $flags = self::USE_ITERATOR, $direction = self::UP)
     {
         $this->iterator  = $iterator;
-        $this->flags     = (int)$flags;
-        $this->direction = (int)(bool)$direction;
+        $this->flags     = (int) $flags;
+        $this->direction = (int) (bool) $direction;
 
         parent::__construct();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function rewind()
     {
         $low  = 0;
@@ -59,6 +78,9 @@ class SubIteratorIterator extends TraversableDecorator
         $this->traversable = new RangeIterator($low, $high, 1);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function current()
     {
         $level = parent::current();

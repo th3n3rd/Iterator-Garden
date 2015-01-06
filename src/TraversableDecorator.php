@@ -25,11 +25,13 @@ use EmptyIterator;
 use IteratorIterator;
 
 /**
- * Class TraversableDecorator
+ * Class TraversableDecorator.
  *
  * A Decorator Class for a Traversable (Iterator)
  *
- * Because Traversable can not be implemented in PHP Userspace, Iterator - which is a Traversable - is implemented
+ * Because Traversable can not be implemented in PHP Userspace, Iterator - which is a Traversable - is implemented.
+ *
+ * @package IteratorGarden
  */
 class TraversableDecorator implements Iterator
 {
@@ -39,6 +41,8 @@ class TraversableDecorator implements Iterator
     protected $traversable;
 
     /**
+     * Constructor.
+     *
      * @param Traversable $traversable (optional)
      */
     public function __construct(Traversable $traversable = NULL)
@@ -51,26 +55,41 @@ class TraversableDecorator implements Iterator
                 : new IteratorIterator($traversable);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function rewind()
     {
         $this->traversable->rewind();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function valid()
     {
         return $this->traversable->valid();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function current()
     {
         return $this->traversable->current();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function key()
     {
         return $this->traversable->key();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function next()
     {
         $this->traversable->next();

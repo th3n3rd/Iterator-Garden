@@ -24,7 +24,9 @@ use IteratorIterator;
 use Traversable;
 
 /**
- * Class ChunkAbstract
+ * Class ChunkAbstract.
+ *
+ * @package IteratorGarden
  */
 abstract class ChunkAbstract implements Iterator
 {
@@ -33,11 +35,19 @@ abstract class ChunkAbstract implements Iterator
      */
     protected $traversable;
 
+    /**
+     * @var int
+     */
     protected $size;
 
+    /**
+     * @var bool
+     */
     protected $standAlone = true;
 
     /**
+     * Constructor.
+     *
      * @param Traversable $traversable
      * @param int         $size
      */
@@ -47,6 +57,8 @@ abstract class ChunkAbstract implements Iterator
     }
 
     /**
+     * Sets internal traversable.
+     *
      * @param Traversable $traversable
      */
     protected function setTraversable(Traversable $traversable)
@@ -57,26 +69,41 @@ abstract class ChunkAbstract implements Iterator
                 : new IteratorIterator($traversable);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function rewind()
     {
         $this->traversable->rewind();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function valid()
     {
         return $this->traversable->valid();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function current()
     {
         return $this->traversable->current();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function key()
     {
         return $this->traversable->key();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function next()
     {
         $this->traversable->next();

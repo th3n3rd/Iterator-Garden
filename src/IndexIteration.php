@@ -22,24 +22,40 @@ namespace IteratorGarden;
 use IteratorIterator;
 
 /**
- * Class IndexIteration
+ * Class IndexIteration.
  *
- * An Iteration that keeps an Index while iterating
+ * An Iteration that keeps an Index while iterating.
+ *
+ * @package IteratorGarden
  */
 class IndexIteration extends IteratorIterator
 {
+    /**
+     * @var int
+     */
     private $index;
 
+    /**
+     * {@inheritdoc}
+     */
     public function rewind() {
         $this->index = 0;
         parent::rewind();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function next() {
         parent::valid() && $this->index++;
         parent::next();
     }
 
+    /**
+     * Returns the current index.
+     *
+     * @return int
+     */
     public function getIndex() {
         return $this->index;
     }

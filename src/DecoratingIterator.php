@@ -24,22 +24,35 @@ use IteratorIterator;
 use Traversable;
 
 /**
- * Class DecoratingIterator
+ * Class DecoratingIterator.
  *
- * @author Marcus Börger (2008)
- * @link https://code.google.com/p/cvphplib/source/browse/trunk/cvphplib/code/iterator_madness.inc.php?r=6
+ * @package IteratorGarden
+ * @author  Marcus Börger (2008)
+ * @link    https://code.google.com/p/cvphplib/source/browse/trunk/cvphplib/code/iterator_madness.inc.php?r=6
  * @example http://stackoverflow.com/a/16998550/367456
  */
 class DecoratingIterator extends IteratorIterator
 {
+    /**
+     * @var mixed
+     */
     private $decorator;
 
+    /**
+     * Constructor.
+     *
+     * @param Traversable $iterator
+     * @param mixed       $decorator
+     */
     function __construct(Traversable $iterator, $decorator)
     {
         $this->decorator = $decorator;
         parent::__construct($iterator);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     function current()
     {
         if (is_callable($this->decorator)) {

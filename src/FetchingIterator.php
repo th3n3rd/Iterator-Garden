@@ -23,19 +23,42 @@ use InvalidArgumentException;
 use Iterator;
 
 /**
- * Class FetchingIterator
+ * Class FetchingIterator.
+ *
+ * @package IteratorGarden
  */
 class FetchingIterator implements Iterator
 {
+    /**
+     * @var callable
+     */
     private $callback;
+
+    /**
+     * @var int
+     */
     private $index;
+
+    /**
+     * @var mixed
+     */
     private $current;
+
+    /**
+     * @var bool
+     */
     private $valid;
+
+    /**
+     * @var mixed
+     */
     private $stopValue;
 
     /**
+     * Constructor.
+     *
      * @param Callable $callback
-     * @param mixed $stopValue (optional)
+     * @param mixed    $stopValue
      */
     public function __construct($callback, $stopValue = NULL)
     {
@@ -46,32 +69,52 @@ class FetchingIterator implements Iterator
         $this->stopValue = $stopValue;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function rewind()
     {
         $this->index = -1;
         $this->fetchNext();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function valid()
     {
         return $this->valid;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function current()
     {
         return $this->current;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function key()
     {
         return $this->index;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function next()
     {
         $this->fetchNext();
     }
 
+    /**
+     * Fetches the next element.
+     *
+     * @return void.
+     */
     protected function fetchNext()
     {
         $this->index++;

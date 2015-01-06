@@ -20,9 +20,20 @@
 namespace IteratorGarden;
 
 use FilterIterator;
+use Iterator;
 
+/**
+ * Class ForeachFilterIterator.
+ *
+ * @package   IteratorGarden
+ */
 abstract class ForeachFilterIterator extends FilterIterator
 {
+    /**
+     * Constructor.
+     *
+     * @param Iterator $foreachAble
+     */
     public function __construct($foreachAble) {
         parent::__construct(ForeachIterator::getIterator($foreachAble));
     }

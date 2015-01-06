@@ -18,15 +18,24 @@
  */
 
 namespace IteratorGarden;
+
 use RecursiveIterator;
 
 /**
- * Class DualRecursiveDirectoryIterator
+ * Class DualRecursiveDirectoryIterator.
+ *
+ * @package IteratorGarden
  */
 class DualRecursiveDirectoryIterator extends DualDirectoryIterator implements RecursiveIterator
 {
+    /**
+     * @var string
+     */
     protected $subPath;
 
+    /**
+     * {@inheritdoc}
+     */
     public function hasChildren()
     {
         if ($this->areEqual()) {
@@ -43,7 +52,7 @@ class DualRecursiveDirectoryIterator extends DualDirectoryIterator implements Re
     {
         $fileName = $this->current->getFilename();
 
-        $child = new DualRecursiveDirectoryIterator(
+        $child = new static(
             $this->pathA->getPath() . '/' . $fileName,
             $this->pathB->getPath() . '/' . $fileName,
             $this->flags
@@ -61,11 +70,21 @@ class DualRecursiveDirectoryIterator extends DualDirectoryIterator implements Re
         return $child;
     }
 
+    /**
+     * Returns the sub path.
+     *
+     * @return string
+     */
     public function getSubPath()
     {
         return $this->subPath;
     }
 
+    /**
+     * Returns the sub path name.
+     *
+     * @return string
+     */
     public function getSubPathname()
     {
         $fileName = $this->current->getFilename();

@@ -26,12 +26,19 @@ use Iterator;
 use Traversable;
 
 /**
- * Class ForeachIterator
+ * Class ForeachIterator.
  *
  * An Iterator that iterates in a similar manner like otherwise with foreach.
+ *
+ * @package IteratorGarden
  */
 class ForeachIterator extends IteratorIterator
 {
+    /**
+     * Constructor.
+     *
+     * @param Traversable $foreachAble
+     */
     public function __construct($foreachAble)
     {
         parent::__construct(self::getTraversable($foreachAble));

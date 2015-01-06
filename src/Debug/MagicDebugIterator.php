@@ -20,23 +20,42 @@
 namespace IteratorGarden\Debug;
 
 /**
- * Class MagicDebugIterator
+ * Class MagicDebugIterator.
  *
  * A MagicDebugIterator that also shows access to unset properties (__get()) and method
  * calls to undefined methods (__call()).
+ *
+ * @package IteratorGarden\Debug
  */
 class MagicDebugIterator extends DebugIterator
 {
+    /**
+     * Handles access to unset properties.
+     *
+     * @param string $name
+     */
     public function __get($name)
     {
         $this->event(sprintf('__get(%s)'), $name);
     }
 
+    /**
+     * Handles calls to undefined methods.
+     *
+     * @param string $name
+     * @param mixed  $arguments
+     */
     public function __call($name, $arguments)
     {
         $this->event(sprintf('__call(%s, [%s])'), $this->args($name), $this->args($arguments));
     }
 
+    /**
+     * Parses arguments.
+     *
+     * @param $args
+     * @return mixed|string
+     */
     private function args($args)
     {
         if (is_array($args)) {

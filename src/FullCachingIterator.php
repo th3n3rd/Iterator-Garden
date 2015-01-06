@@ -23,6 +23,8 @@ use IteratorIterator;
 use Traversable;
 
 /**
+ * Class FullCachingIterator.
+ *
  * Iterator that caches up to a whole iteration while iterating
  *
  * In difference to CachingIterator:
@@ -31,6 +33,8 @@ use Traversable;
  *  - Does not rewind (like NoRewindIterator)
  *  - Accepts any kind of key values incl. those that lead to data-loss
  *    with CachingIterator.
+ *
+ * @package IteratorGarden
  */
 class FullCachingIterator extends IteratorIterator
 {
@@ -49,11 +53,19 @@ class FullCachingIterator extends IteratorIterator
      */
     private $cache;
 
+    /**
+     * Constructor.
+     *
+     * @param Traversable $iterator
+     */
     public function __construct(Traversable $iterator)
     {
         parent::__construct($iterator);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function rewind()
     {
         if (!isset($this->index)) {
@@ -63,21 +75,33 @@ class FullCachingIterator extends IteratorIterator
         $this->cache = $this->steps[$this->index = 0];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function valid()
     {
         return $this->cache->getValid();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function current()
     {
         return $this->cache->getCurrent();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function key()
     {
         return $this->cache->getKey();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function next()
     {
         $index = ++$this->index;

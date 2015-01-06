@@ -20,22 +20,36 @@
 namespace IteratorGarden;
 
 /**
- * Class IteratorChunk
+ * Class IteratorChunk.
+ *
+ * @package IteratorGarden
  */
 final class IteratorChunk extends ChunkAbstract
 {
+    /**
+     * @var int
+     */
     private $count;
 
+    /**
+     * {@inheritdoc}
+     */
     public function rewind() {
         $this->count = $this->size;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function next() {
         $this->count
         && (--$this->count || $this->standAlone)
         && parent::next();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function valid() {
         return $this->count && parent::valid();
     }
