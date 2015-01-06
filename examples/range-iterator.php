@@ -23,7 +23,10 @@
  * Instead of a large array, an iterator can be used.
  */
 
-require(__DIR__ . '/../src/autoload.php');
+use IteratorGarden\Debug\SeekableDebugIterator;
+use IteratorGarden\RangeIterator;
+
+require __DIR__ . '/../vendor/autoload.php';
 
 $range = new RangeIterator(3, 23);
 
